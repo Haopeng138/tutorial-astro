@@ -1,8 +1,18 @@
-<main>
-    <h1>Mi blog</h1>
-    <h1>¡Bienvenido a mi blog!</h1>
-  
-    <p>Estoy trabajando en el tutorial introductorio de Astro. Esta es la tercera página de mi sitio web, ¡y es la primera que he construido yo mismo!</p>
-  
-    <p>Este sitio se irá actualizando a medida que vaya completando más partes del tutorial, ¡así que no dejes de visitarlo para ver cómo va mi viaje!</p>
-</main>
+---
+import Layout from "../layouts/Layout.astro";
+const allPosts = await Astro.glob("../pages/posts/*.md");
+const pageTitle = "Mi blog de aprendizaje de Astro";
+---
+
+<Layout title={pageTitle}>
+  <p>Aquí es donde publicaré sobre mi viaje de aprendizaje de Astro.</p>
+  <ul>
+    {
+      allPosts.map((post) => (
+        <li>
+          <a href={post.url}>{post.frontmatter.title}</a>
+        </li>
+      ))
+    }
+  </ul>
+</Layout>
